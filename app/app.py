@@ -1,4 +1,4 @@
-"""PaperLens: speaker demo app for GDI Build Beyond 2026.
+"""PaperLens: an AI research companion, built for GDI Build Beyond 2026.
 
 Upload or paste a research paper and get:
   1. a plain-English summary at your level
@@ -6,10 +6,11 @@ Upload or paste a research paper and get:
   3. a method flow diagram (AI writes the steps, CODE draws the diagram)
   4. key claims with a supporting quote (CODE checks each quote really appears in the paper)
 
-Live AI is optional. Without an API key the app shows a prepared example, so the demo never breaks.
+Live AI is optional: without an API key, the app shows a prepared example, so you can explore it first.
 """
 import os
 import re
+from html import escape as esc  # paper text is data: escape it before putting it in HTML
 from pathlib import Path
 
 import streamlit as st                  # Streamlit: turns this Python file into a web app (our front end)
@@ -70,7 +71,7 @@ def analyze(text: str, audience: str) -> PaperBreakdown:
 Return:
 - a one-line description and a 3-sentence plain summary written for a {audience}
 - why it matters
-- a glossary of the 6-10 hardest terms, each with a plain meaning and a cooking analogy
+- a glossary of the 6-10 hardest terms, each with a plain meaning and an everyday analogy
 - the method as 4-7 ordered steps (short box labels)
 - 3-5 key claims, each with a supporting quote copied EXACTLY from the source text
 - limitations
@@ -157,7 +158,6 @@ def flow_to_dot(steps: list[FlowStep]) -> str:
 
 # ---------- 5. SHOW: the interface (everything below draws the page) ----------
 # Streamlit reruns this whole file from top to bottom every time you click something.
-from html import escape as esc  # paper text is data: escape it before putting it in HTML
 
 st.set_page_config(page_title="PaperLens", page_icon="📚", layout="wide")
 st.markdown("""
@@ -196,7 +196,7 @@ st.markdown("""
 .pl-claim.ok .tag {color:#0E7A5F;} .pl-claim.warn .tag {color:#B8341B;}
 </style>
 <div class="pl-hero"><h1>📚 <span style="color:#FBF8F3">Paper</span><span>Lens</span></h1>
-<p>AI is moving fast. Understand new papers, and the classics they build on.</p></div>
+<p>Research is hard to keep up with. Understand new papers, and the classics they build on.</p></div>
 """, unsafe_allow_html=True)
 
 # Inputs: the PDF, the audience level, and the live-AI safety switch
@@ -247,8 +247,8 @@ if st.button("✨ Explain this paper", type="primary"):
                             for i, s in enumerate(result.plain_summary, 1)), unsafe_allow_html=True)
         st.markdown(f'<div class="pl-why"><b>Why it matters:</b> {esc(result.why_it_matters)}</div>', unsafe_allow_html=True)
         st.markdown("**Limitations**")
-        for l in result.limitations:
-            st.markdown(f"- {l}")
+        for item in result.limitations:
+            st.markdown(f"- {item}")
     with t2:
         st.markdown('<div class="pl-grid">' + "".join(
             f'<div class="pl-term"><div class="h">{esc(t.term)}</div><div>{esc(t.plain_meaning)}</div>'
