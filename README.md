@@ -79,10 +79,13 @@ Pick a plain "flash" name (not lite, tts, image, audio or preview) and drop the 
 
 No key yet? The app still runs: leave **Live AI** off to explore the prepared example.
 
-## Weekend ideas
-- **Beginner:** add a "real-world example" field, or explain papers in another language.
-- **Intermediate:** show the page each quote came from; add a quiz.
-- **Advanced:** upload a new paper and the classic it builds on, and explain what changed.
+## Ideas to take it further
+- Add a "real-world example" for every paper
+- Explain papers in another language
+- Show the page number each quote came from
+- Add a quiz to test what you learned
+- Compare a new paper with the classic it builds on
+- Read figures and tables with a vision model
 
 ## Good habits
 - The free Gemini tier has rate limits, and Google may use free-tier inputs to improve its products. Use public papers only.

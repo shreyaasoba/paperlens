@@ -1,147 +1,127 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PaperLens · GDI Build Beyond 2026</title>
+<title>PaperLens · Preview</title>
 <style>
-:root{--ink:#1F1B2E;--muted:#5B5670;--bg:#FBF8F3;--card:#fff;--line:#E6E1F5;--purple:#6D4AFF;--purple2:#5A37E6;--lav:#EEE9FF;--coral:#F0644A;--ok:#0E7A5F;--warn:#B8341B}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
-.shell{max-width:1120px;margin:auto;padding:24px 16px 56px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
-.brand{font-size:26px;font-weight:800;letter-spacing:-.6px}.brand span{color:var(--purple)}
-.tag{background:var(--lav);color:var(--purple2);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;white-space:nowrap}
-.hero{background:var(--ink);color:#FBF8F3;border-radius:24px;padding:28px;display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
-.hero h1{font-size:34px;line-height:1.15;margin:10px 0;letter-spacing:-1px}.hero p{color:#D9D2F2;margin:0}
-.hero .box{background:#2C2742;border-radius:16px;padding:18px;align-self:center}
-.hero .box b{color:#FF9A85}
-.grid{display:grid;grid-template-columns:360px 1fr;gap:18px;margin-top:18px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}
-h2{font-size:17px;margin:0 0 12px}h3{font-size:15px;margin:0 0 6px}
-.small{color:var(--muted);font-size:13px}
-label{display:block;font-weight:700;font-size:13px;margin:14px 0 6px}
-select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;background:#FDFCFA}
-textarea{min-height:150px;resize:vertical}
-button{font:inherit;cursor:pointer;border:0;border-radius:12px}
-.primary{width:100%;background:var(--purple);color:#fff;font-weight:700;padding:12px;margin-top:12px}
-.secondary{background:var(--lav);color:var(--purple2);font-weight:700;padding:9px 14px;font-size:14px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.tabs button{background:#F3F0FA;color:var(--muted);padding:8px 12px;font-size:14px;font-weight:600}
-.tabs button.active{background:var(--purple);color:#fff}
-.section{display:none}.section.active{display:block}
-.item{border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;background:#fff}
-.item p{margin:0}
-.analogy{color:var(--muted);font-size:14px;margin-top:4px!important}
-.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 14px}
-.flow span{background:var(--lav);border:1.5px solid var(--purple);border-radius:12px;padding:8px 12px;font-size:14px;font-weight:600}
-.flow i{color:var(--coral);font-style:normal;font-weight:800}
-.eq{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:18px;background:var(--ink);color:#FBF8F3;padding:16px;border-radius:14px;text-align:center;margin-bottom:12px;overflow-x:auto}
-.pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700}
-.pill.ok{background:#E3F5EE;color:var(--ok)}.pill.warn{background:#FDECE8;color:var(--warn)}.pill.hide{display:none}
-.copy{background:var(--ink);color:#E9E4F7;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;padding:14px;border-radius:12px;white-space:pre-wrap}
-.foot{color:var(--muted);font-size:12px;margin-top:18px}
-@media (max-width:860px){.hero,.grid{grid-template-columns:1fr}.hero h1{font-size:28px}}
+*{box-sizing:border-box}
+body{margin:0;background:#FBF8F3;color:#1F1B2E;font-family:"Source Sans 3","Source Sans Pro",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:auto;padding:28px 16px 56px}
+.hero{background:linear-gradient(120deg,#1F1B2E 0%,#3B2A6B 60%,#6D4AFF 100%);color:#FBF8F3;border-radius:24px;padding:28px 32px;margin-bottom:16px}
+.hero h1{margin:0;font-size:2.4rem}.hero h1 span{color:#FF9A85}
+.hero p{color:#D9D2F2;margin:6px 0 0}
+.note{background:#EEE9FF;border-radius:12px;padding:12px 16px;margin-bottom:18px;font-size:.95rem}
+.controls{display:flex;gap:16px;flex-wrap:wrap;align-items:end;margin-bottom:16px}
+.controls label{display:block;font-size:.9rem;margin-bottom:4px}
+select{padding:9px 12px;border:1px solid #D9CFFF;border-radius:10px;font:inherit;background:#fff;min-width:200px}
+.btn{background:#6D4AFF;color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer}
+.title{font-size:1.6rem;font-weight:800;margin:10px 0 6px}
+.oneline{background:#EEE9FF;border-left:6px solid #6D4AFF;border-radius:12px;padding:14px 18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.stat{background:#fff;border:1px solid #E6E1F5;border-radius:16px;padding:12px 16px}
+.stat b{display:block;font-size:1.6rem;color:#6D4AFF}.stat span{color:#5B5670;font-size:.9rem}
+.tabs{display:flex;gap:4px;border-bottom:1px solid #E6E1F5;margin:6px 0 16px;flex-wrap:wrap}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 12px;font:inherit;color:#1F1B2E;cursor:pointer}
+.tabs button.active{border-bottom-color:#6D4AFF;color:#6D4AFF}
+.panel{display:none}.panel.active{display:block}
+.card{background:#fff;border:1px solid #E6E1F5;border-radius:16px;padding:16px 18px;margin-bottom:12px}
+.num{display:inline-block;background:#6D4AFF;color:#fff;border-radius:999px;width:28px;height:28px;text-align:center;line-height:28px;font-weight:700;margin-right:10px}
+.why{background:#FFF1EE;border-radius:14px;padding:14px 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.term{background:#fff;border:1px solid #E6E1F5;border-top:5px solid #6D4AFF;border-radius:16px;padding:16px 18px}
+.term .h{font-weight:700;font-size:1.15rem;margin-bottom:6px}
+.like{margin-top:8px;background:#FBF8F3;border-radius:10px;padding:8px 10px;color:#5B5670;font-size:.95rem}
+.step{display:flex;gap:16px}
+.rail{display:flex;flex-direction:column;align-items:center;width:46px;flex:none}
+.dot{width:46px;height:46px;border-radius:999px;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.line{flex:1;width:4px;min-height:18px;background:linear-gradient(#C9B8FF,#FFB4A3)}
+.body{flex:1;background:#fff;border:1px solid #E6E1F5;border-radius:16px;padding:12px 16px;margin-bottom:12px}
+.body .h{font-weight:700}.body p{margin:0;color:#4A4458}
+.claim{border-radius:16px;padding:14px 18px;margin-bottom:12px}
+.claim.ok{background:#E3F5EE;border-left:6px solid #0E7A5F}.claim.warn{background:#FDECE8;border-left:6px solid #B8341B}
+.claim .tag{font-weight:700;font-size:.85rem}.claim.ok .tag{color:#0E7A5F}.claim.warn .tag{color:#B8341B}
+.claim .q{font-style:italic;color:#4A4458;margin-top:6px}
+.small{color:#5B5670;font-size:.9rem}
+.try{margin-top:32px;background:#fff;border:1px solid #E6E1F5;border-radius:16px;padding:18px}
+.try pre{background:#1F1B2E;color:#E9E4F7;border-radius:12px;padding:14px;white-space:pre-wrap;font-size:.9rem}
+.foot{color:#5B5670;font-size:.85rem;margin-top:24px}
+@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}.hero h1{font-size:1.9rem}}
 </style></head>
-<body><main class="shell">
-<header><div class="brand">Paper<span>Lens</span></div><span class="tag">GDI · Build Beyond 2026</span></header>
+<body><main class="wrap">
+<div class="hero"><h1>📚 Paper<span>Lens</span></h1><p>AI is moving fast. Understand new papers, and the classics they build on.</p></div>
+<div class="note"><b>Preview with a prepared example.</b> This page shows what PaperLens gives you for <i>Attention Is All You Need</i> (2017). It makes no AI calls. To upload your own paper, run the app from <a href="https://github.com/shreyaasoba/paperlens">github.com/shreyaasoba/paperlens</a>.</div>
 
-<section class="hero">
-  <div>
-    <span class="tag" style="background:#2C2742;color:#C9B8FF">AI RESEARCH COMPANION</span>
-    <h1>AI is moving fast. Understand new papers, and the classics they build on.</h1>
-    <p>Today's example is the 2017 paper behind modern AI: <em>Attention Is All You Need</em>. PaperLens turns it into a plain summary, a jargon buster, a method flow diagram and checked claims.</p>
-  </div>
-  <div class="box"><b>Zero setup.</b> No account, install or API key. This page shows a prepared example; the speaker's app makes the live AI call.</div>
+<div class="controls">
+  <div><label for="level">Explain for</label><select id="level"><option>Beginner</option><option>Developer</option><option>Researcher</option></select></div>
+  <button class="btn" id="go">✨ Explain this paper</button>
+</div>
+
+<div class="title">Attention Is All You Need (Vaswani et al., 2017)</div>
+<div class="oneline"><b>In one line:</b> A new way for AI to read whole sentences at once by deciding which words matter to each other.</div>
+<div class="stats">
+  <div class="stat"><b>7</b><span>terms explained</span></div>
+  <div class="stat"><b>6</b><span>method steps</span></div>
+  <div class="stat"><b>2/3</b><span>quotes found in the paper</span></div>
+  <div class="stat"><b id="lv">Beginner</b><span>explanation level</span></div>
+</div>
+
+<div class="tabs">
+  <button class="active" data-t="sum">📝 Plain summary</button>
+  <button data-t="jar">🔤 Jargon buster</button>
+  <button data-t="flow">🔀 Method flow</button>
+  <button data-t="chk">✅ Check the claims</button>
+</div>
+
+<section class="panel active" id="sum">
+  <div id="sumcards"></div>
+  <div class="why"><b>Why it matters:</b> The “T” in GPT stands for Transformer: most modern AI models build on this architecture.</div>
+  <p><b>Limitations</b></p>
+  <ul><li>Shows results on specific translation tasks, not every task.</li><li>Does not show that later systems share the same measured performance.</li></ul>
 </section>
 
-<div class="grid">
-  <section class="panel">
-    <h2>1 · Design the prompt</h2>
-    <label for="audience">Explain for</label>
-    <select id="audience"><option>Beginner</option><option>Developer</option><option>Researcher</option></select>
-    <label for="prompt">Prompt</label>
-    <textarea id="prompt">Summarize this paper.</textarea>
-    <button class="primary" id="analyze">See PaperLens result →</button>
-    <p class="small">Activity: make this prompt better. Add who it's for, the parts you want back, and a rule about not inventing things.</p>
-    <h2 style="margin-top:20px">2 · Try it yourself (3 min)</h2>
-    <p class="small">Open any free AI chat, paste this, then paste an abstract from arxiv.org. Compare your answer with someone else's in the Zoom chat.</p>
-    <div class="copy" id="tryprompt">Explain this paper abstract for a beginner.
+<section class="panel" id="jar"><div class="grid">
+  <div class="term"><div class="h">Transformer</div><div>A model design built mainly on attention.</div><div class="like">💡 Like: A team where everyone can talk to everyone at once, instead of passing notes down a line.</div></div>
+  <div class="term"><div class="h">Attention</div><div>A way to decide which other words matter most for each word.</div><div class="like">💡 Like: Highlighting the key words in a sentence before answering a question about it.</div></div>
+  <div class="term"><div class="h">Self-attention</div><div>Words in the same sentence paying attention to each other.</div><div class="like">💡 Like: In “The cat sat because it was tired”, working out that “it” means the cat.</div></div>
+  <div class="term"><div class="h">Multi-head attention</div><div>Several attention processes running side by side, each noticing different relationships.</div><div class="like">💡 Like: A few friends reading the same text, each looking for something different.</div></div>
+  <div class="term"><div class="h">Encoder-decoder</div><div>One part understands the input, another produces the output.</div><div class="like">💡 Like: A listener who understands French and a speaker who says it in English.</div></div>
+  <div class="term"><div class="h">Positional encoding</div><div>Extra information telling the model the order of the words.</div><div class="like">💡 Like: Page numbers in a shuffled stack of pages.</div></div>
+  <div class="term"><div class="h">Recurrence</div><div>Processing one step at a time, carrying memory forward.</div><div class="like">💡 Like: Reading a book one word at a time without skipping ahead.</div></div>
+</div></section>
+
+<section class="panel" id="flow"><div id="steps"></div>
+  <p class="small">The AI wrote these steps. Our code drew the timeline, so it is always well-formed.</p></section>
+
+<section class="panel" id="chk">
+  <p class="small">Code checks that every quote really appears in the paper. A chat window can't do this for you.</p>
+  <div class="claim ok"><div class="tag">✓ Quote found in the paper</div><b>The Transformer uses attention instead of recurrence as its main way of combining information.</b><div class="q">“Can a sequence-to-sequence model rely on attention rather than recurrence or convolution”</div></div>
+  <div class="claim ok"><div class="tag">✓ Quote found in the paper</div><b>Multi-head attention models several relationships between tokens.</b><div class="q">“multi-head attention allows multiple learned relationships among tokens to be modeled”</div></div>
+  <div class="claim warn"><div class="tag">⚠ Quote NOT found: needs human review</div><b>Transformers are the best model for every task.</b><div class="q">“Transformers are always the best architecture”</div></div>
+</section>
+
+<div class="try">
+  <b>Try it yourself in any free AI chat</b> (Gemini, ChatGPT or Claude). Paste this, then a paper abstract from arxiv.org:
+  <pre id="prompt">Explain this paper abstract for a beginner.
 Give me:
 1. A 3-sentence plain summary
 2. The 5 hardest terms, each with a simple meaning and an everyday analogy
 3. The method as 4-6 steps (A → B → C)
 4. 3 key claims, each with an exact quote from the abstract
-Rules: don't invent numbers or results. If it's not in the text, say so.</div>
-    <button class="secondary" id="copybtn" style="margin-top:10px">Copy prompt</button>
-  </section>
-
-  <section class="panel">
-    <div class="tabs" role="tablist">
-      <button class="active" data-tab="summary">Plain summary</button>
-      <button data-tab="jargon">Jargon buster</button>
-      <button data-tab="flow">Method flow</button>
-      <button data-tab="equation">The equation</button>
-      <button data-tab="claims">Check the claims</button>
-      <button data-tab="agent">Agent next</button>
-    </div>
-
-    <div id="summary" class="section active">
-      <h2 id="level-note">Plain summary · Beginner</h2>
-      <div id="summary-cards"></div>
-    </div>
-
-    <div id="jargon" class="section">
-      <h2>Jargon buster</h2>
-      <div class="item"><h3>Transformer</h3><p>A model design built mainly on attention.</p><p class="analogy">Like a team where everyone can talk to everyone at once, instead of passing notes down a line.</p></div>
-      <div class="item"><h3>Attention</h3><p>Deciding which other words matter most for each word.</p><p class="analogy">Like highlighting the key words before answering a question.</p></div>
-      <div class="item"><h3>Self-attention</h3><p>Words in the same sentence paying attention to each other.</p><p class="analogy">In "The cat sat because it was tired", working out that "it" means the cat.</p></div>
-      <div class="item"><h3>Multi-head attention</h3><p>Several attention processes side by side, each noticing different relationships.</p><p class="analogy">Like a few friends reading the same text, each looking for something different.</p></div>
-      <div class="item"><h3>Encoder–decoder</h3><p>One part understands the input; another produces the output.</p><p class="analogy">Like a listener who understands French and a speaker who says it in English.</p></div>
-      <div class="item"><h3>Positional encoding</h3><p>Extra information that tells the model the order of words.</p><p class="analogy">Like page numbers on a shuffled stack of pages.</p></div>
-    </div>
-
-    <div id="flow" class="section">
-      <h2>How the method works</h2>
-      <div class="flow"><span>1 · Split into tokens</span><i>→</i><span>2 · Add word order</span><i>→</i><span>3 · Self-attention</span><i>→</i><span>4 · Feed-forward</span><i>→</i><span>5 · Decoder attends</span><i>→</i><span>6 · Generate output</span></div>
-      <p class="small">In the app, the AI writes these steps and <b>code draws the diagram</b>, so the picture is always well-formed. This is a teaching simplification, not the paper's original figure.</p>
-    </div>
-
-    <div id="equation" class="section">
-      <h2>The famous equation, in plain words</h2>
-      <div class="eq">Attention(Q, K, V) = softmax(QKᵀ / √dₖ) V</div>
-      <div class="item"><h3>In everyday language</h3><p>Compare what you're looking for (queries) with what's available (keys), turn the match scores into weights, then blend the information (values) using those weights. Dividing by √dₖ keeps the scores from getting too big.</p></div>
-      <div class="item"><h3>Like a library search</h3><p><b>Q</b> is your question, <b>K</b> are the book labels, <b>V</b> is what's inside the books. You read more of the books whose labels best match your question.</p></div>
-    </div>
-
-    <div id="claims" class="section">
-      <h2>Can we trust the answer?</h2>
-      <p class="small">Vote in the chat first: which claim needs review? Then reveal. In the app, <b>code checks every quote really appears in the paper</b>, which a chat window can't do for you.</p>
-      <div class="item"><h3>Claim 1</h3><p>The paper introduced the Transformer architecture.</p><p style="margin-top:8px"><span class="pill ok hide">✓ Quote found in the paper</span></p></div>
-      <div class="item"><h3>Claim 2</h3><p>Multi-head attention models several relationships between words.</p><p style="margin-top:8px"><span class="pill ok hide">✓ Quote found in the paper</span></p></div>
-      <div class="item"><h3>Claim 3</h3><p>The paper proved Transformers beat every future model on every task.</p><p style="margin-top:8px"><span class="pill warn hide">⚠ No supporting quote: needs human review</span></p></div>
-      <button class="secondary" id="reveal">Reveal the check</button>
-    </div>
-
-    <div id="agent" class="section">
-      <h2>Where this goes next: an agent</h2>
-      <div class="flow"><span>Goal: explain a claim</span><i>→</i><span>Decide: need evidence?</span><i>→</i><span>Tool: search the paper</span><i>→</i><span>Check the result</span><i>→</i><span>Answer with source, or stop</span></div>
-      <p class="small">An agent chooses its next step and calls tools, with a step limit and a stop rule. This page only illustrates the design.</p>
-    </div>
-  </section>
+Rules: don't invent numbers or results. If it's not in the text, say so.</pre>
+  <button class="btn" id="copy">Copy prompt</button>
 </div>
 
-<p class="foot">Educational example with prepared outputs; no live AI calls on this page. Never upload a paper you're peer-reviewing or anything confidential to an AI tool. Source: Vaswani et al. (2017), <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Attention Is All You Need</a>.</p>
+<p class="foot">Public papers only. Never upload a paper you're peer-reviewing, or anything confidential, to an AI tool. Source: Vaswani et al. (2017), <a href="https://arxiv.org/abs/1706.03762">arxiv.org/abs/1706.03762</a>. Made by Shreya Asoba for Girl Develop It · Build Beyond 2026.</p>
 </main>
 <script>
-const summaries={
- Beginner:["Older translation models read a sentence one word at a time, which was slow.","The Transformer looks at all the words together and learns which ones to pay attention to.","That idea became the backbone of today's AI chatbots: the 'T' in GPT."],
- Developer:["Replaces recurrence with self-attention, so sequences are processed in parallel.","Stacks of multi-head attention and feed-forward layers, plus positional encodings for order.","Encoder–decoder design evaluated on machine translation; later adapted into decoder-only LLMs."],
- Researcher:["Question: can attention alone, without recurrence or convolution, carry sequence transduction?","Contribution: the Transformer architecture with multi-head scaled dot-product attention.","Check: results are on specific translation benchmarks; claims beyond those need separate evidence."]};
-function render(){const l=document.getElementById('audience').value;document.getElementById('level-note').textContent='Plain summary · '+l;
- document.getElementById('summary-cards').innerHTML=summaries[l].map(s=>'<div class="item"><p>'+s+'</p></div>').join('');}
-render();
-document.getElementById('analyze').addEventListener('click',()=>{render();show('summary');});
-document.getElementById('audience').addEventListener('change',render);
-function show(id){document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));}
-document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
-document.getElementById('reveal').addEventListener('click',()=>document.querySelectorAll('#claims .pill').forEach(p=>p.classList.remove('hide')));
-document.getElementById('copybtn').addEventListener('click',async e=>{try{await navigator.clipboard.writeText(document.getElementById('tryprompt').innerText);e.target.textContent='Copied ✓';}catch(_){e.target.textContent='Select the text and copy';}});
+const S={Beginner:["Older translation models read a sentence one word at a time, which was slow.","This paper's Transformer looks at all the words together and learns which ones to pay attention to.","That idea became the backbone of today's large language models."],
+Developer:["Replaces recurrence with self-attention, so the whole sequence is processed in parallel.","Stacks multi-head attention and feed-forward layers, plus positional encodings for word order.","An encoder–decoder design tested on translation, later adapted into today's decoder-only LLMs."],
+Researcher:["Question: can attention alone, without recurrence or convolution, carry sequence transduction?","Contribution: the Transformer, built on multi-head scaled dot-product attention.","Scope: results are on specific translation benchmarks; wider claims need separate evidence."]};
+const F=[["Split into tokens","The sentence is broken into small pieces."],["Add word order","Positional encodings mark where each piece sits."],["Self-attention","Each piece looks at every other piece and weighs what matters."],["Feed-forward layers","Each piece is refined using what it learned."],["Decoder attends","The output side looks back at the encoded input."],["Generate output","The translation is produced piece by piece."]];
+const C=["#6D4AFF","#7B52F0","#8A5AE0","#B85C9E","#D9605E","#F0644A"];
+function render(){const l=document.getElementById('level').value;document.getElementById('lv').textContent=l;
+document.getElementById('sumcards').innerHTML=S[l].map((s,i)=>'<div class="card"><span class="num">'+(i+1)+'</span>'+s+'</div>').join('');}
+document.getElementById('steps').innerHTML=F.map((f,i)=>'<div class="step"><div class="rail"><div class="dot" style="background:'+C[i]+'">'+(i+1)+'</div>'+(i<F.length-1?'<div class="line"></div>':'')+'</div><div class="body"><div class="h">'+f[0]+'</div><p>'+f[1]+'</p></div></div>').join('');
+render();document.getElementById('go').onclick=render;document.getElementById('level').onchange=render;
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===b.dataset.t));});
+document.getElementById('copy').onclick=async e=>{try{await navigator.clipboard.writeText(document.getElementById('prompt').innerText);e.target.textContent='Copied ✓';}catch(_){e.target.textContent='Select the text and copy';}};
 </script>
 </body></html>

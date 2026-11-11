@@ -224,7 +224,9 @@ if st.button("✨ Explain this paper", type="primary"):
                 with st.spinner("Reading the paper…"):
                     result, used_live = analyze(source, audience), True
             except Exception as exc:  # no internet, bad key, rate limit... never pretend it worked
-                st.warning(f"Live AI unavailable ({type(exc).__name__}). Showing the prepared example instead.")
+                detail = getattr(exc, "message", None) or str(exc)
+                st.warning(f"Live AI unavailable ({type(exc).__name__}: {str(detail)[:200]}). "
+                           "Showing the prepared example instead.")
     if not used_live:
         st.info("Prepared example (no live AI call).")
 
