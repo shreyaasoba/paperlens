@@ -60,13 +60,13 @@ pip install -r requirements.txt
 Mac / Linux:
 ```
 export GEMINI_API_KEY="your-key"
-export GEMINI_MODEL="gemini-2.5-flash"
+export GEMINI_MODEL="gemini-3.8-flash"
 streamlit run app.py
 ```
 Windows:
 ```
 set GEMINI_API_KEY=your-key
-set GEMINI_MODEL=gemini-2.5-flash
+set GEMINI_MODEL=gemini-3.8-flash
 streamlit run app.py
 ```
 Your browser opens at http://localhost:8501. Upload a paper, choose a level and click **Explain this paper**.
