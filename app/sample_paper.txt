@@ -1,0 +1,12 @@
+EDUCATIONAL PARAPHRASE FOR THE GDI WORKSHOP — NOT ORIGINAL PAPER TEXT
+Reference: Vaswani et al., "Attention Is All You Need" (2017), https://arxiv.org/abs/1706.03762
+
+Research question: Can a sequence-to-sequence model rely on attention rather than recurrence or convolution as its main way of combining information?
+
+Approach: The Transformer is an encoder–decoder architecture built with self-attention, encoder–decoder attention, feed-forward networks, and positional encodings. Its multi-head attention allows multiple learned relationships among tokens to be modeled.
+
+Reported evaluation: The paper presents machine-translation experiments, comparing with relevant contemporaneous approaches and discussing training efficiency. Consult the original tables and evaluation settings for exact numerical claims.
+
+Limits: The study does not demonstrate that Transformers are best for every task, nor that later systems necessarily share the same measured performance.
+
+Key equation: Attention(Q,K,V) = softmax(Q K^T / sqrt(d_k)) V.
