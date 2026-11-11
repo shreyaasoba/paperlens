@@ -49,7 +49,7 @@ class PaperBreakdown(BaseModel):  # the full answer: everything the 4 tabs need
 # ---------- 2. READ: get the paper's text ----------
 SAMPLE = Path(__file__).with_name("sample_paper.txt").read_text(encoding="utf-8")
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
-MAX_CHARS = 60_000  # keep requests small and fast for a live demo
+MAX_CHARS = 60_000  # context window limit
 
 
 def read_upload(upload) -> str:
@@ -84,12 +84,22 @@ Rules:
 
 SOURCE TEXT:
 {text[:MAX_CHARS]}"""
-    response = client.models.generate_content(
-        model=MODEL,
-        contents=prompt,
-        # Ask for JSON in exactly the PaperBreakdown shape
-        config={"response_mime_type": "application/json", "response_schema": PaperBreakdown},
-    )
+    import time
+    from google.genai import errors
+
+    for attempt in range(3):  # if Gemini is busy (a server error), wait and try again, up to 3 times
+        try:
+            response = client.models.generate_content(
+                model=MODEL,
+                contents=prompt,
+                # Ask for JSON in exactly the PaperBreakdown shape
+                config={"response_mime_type": "application/json", "response_schema": PaperBreakdown},
+            )
+            break
+        except errors.ServerError:
+            if attempt == 2:
+                raise
+            time.sleep(3 * (attempt + 1))  # wait 3 seconds, then 6
     return PaperBreakdown.model_validate_json(response.text)  # check the reply really fits the shape
 
 
