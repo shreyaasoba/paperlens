@@ -70,7 +70,7 @@ def analyze(text: str, audience: str) -> PaperBreakdown:
 Return:
 - a one-line description and a 3-sentence plain summary written for a {audience}
 - why it matters
-- a glossary of the 6-10 hardest terms, each with a plain meaning and an everyday analogy
+- a glossary of the 6-10 hardest terms, each with a plain meaning and a cooking analogy
 - the method as 4-7 ordered steps (short box labels)
 - 3-5 key claims, each with a supporting quote copied EXACTLY from the source text
 - limitations
@@ -230,7 +230,8 @@ if st.button("✨ Explain this paper", type="primary"):
     if not used_live:
         st.info("Prepared example (no live AI call).")
 
-    checks = [quote_found(c.supporting_quote, source) for c in result.key_claims]  # run CHECK on every claim
+    check_text = source if used_live else SAMPLE  # the prepared example is checked against its own sample text
+    checks = [quote_found(c.supporting_quote, check_text) for c in result.key_claims]  # run CHECK on every claim
     st.markdown(f'<div class="pl-title">{esc(result.title)}</div>'
                 f'<div class="pl-oneline"><b>In one line:</b> {esc(result.one_line)}</div>'
                 '<div class="pl-stats">'
