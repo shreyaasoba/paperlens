@@ -265,7 +265,7 @@ if st.button("✨ Explain this paper", type="primary"):
         st.markdown('<div class="pl-flow">' + "".join(parts) + "</div>", unsafe_allow_html=True)
         st.caption("The AI wrote these steps. Our code drew the diagram, so it is always well-formed.")
         with st.expander("Same flow as a compact diagram"):
-            st.graphviz_chart(flow_to_dot(result.method_flow), use_container_width=True)
+            st.graphviz_chart(flow_to_dot(result.method_flow), width="stretch")
     with t4:
         st.caption("Code checks that every quote really appears in the paper. A chat window can't do this for you.")
         for c, ok in zip(result.key_claims, checks):
